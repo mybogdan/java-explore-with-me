@@ -3,40 +3,43 @@ package ru.practicum.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.dto.StatDto;
 import ru.practicum.dto.ViewStats;
 import ru.practicum.service.StatService;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import javax.validation.Valid;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@Slf4j
 @Validated
+@Slf4j
 public class StatController {
-
     private final StatService statService;
 
-
     @PostMapping("/hit")
+    @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody @Valid StatDto statDto) {
-        log.info("Пришел /POST запрос");
+        log.info("Post запрос на создание статистики -{}", statDto);
         statService.create(statDto);
     }
 
     @GetMapping("/stats")
-    public List<ViewStats> get(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
-                               @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
+    public List<ViewStats> get(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date start,
+                               @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") Date end,
                                @RequestParam(required = false) List<String> uris,
                                @RequestParam(defaultValue = "false") Boolean unique) {
-        log.info("Пришел /GET запрос");
-        List<ViewStats> result = statService.get(start, end, uris, unique);
-        log.info("Ответ отправлен");
-        return result;
+        log.info("Get запрос на получение кол-ва запросов по -{}", uris);
+        return statService.get(start, end, uris, unique);
+    }
 
+    @GetMapping("/statsCount")
+    public Long getCount(@RequestParam(name = "eventUri") String eventUri) {
+        log.info("Get запрос на получение кол-во уникальных запросов по -{}", eventUri);
+        return statService.getCount(eventUri);
     }
 }
