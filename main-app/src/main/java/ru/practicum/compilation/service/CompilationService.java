@@ -3,7 +3,6 @@ package ru.practicum.compilation.service;
 import ru.practicum.compilation.dto.CompilationDto;
 import ru.practicum.compilation.dto.NewCompilationDto;
 import ru.practicum.compilation.dto.UpdateCompilationRequest;
-import ru.practicum.compilation.model.Compilation;
 
 import java.text.ParseException;
 import java.util.List;

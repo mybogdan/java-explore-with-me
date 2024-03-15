@@ -41,13 +41,5 @@ public interface RequestRepository extends JpaRepository<ParticipationRequest, L
                                             @Param("new_state") String newState,
                                             @Param("state") String state);
 
-    @Transactional
-    @Query(value =
-            "SELECT r " +
-            "FROM requests r " +
-            "WHERE r.id IN :ids AND r.event_Id = :event_id", nativeQuery = true)
-    List<ParticipationRequest> findAllByIdAndEventId(@Param("ids") Iterable<Long> ids,
-                                                     @Param("event_id") Long eventId);
-
     List<ParticipationRequest> findAllByIdInAndEventId(List<Long> ids, Long eventId);
 }

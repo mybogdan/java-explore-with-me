@@ -1,7 +1,6 @@
 package ru.practicum.user.service;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
