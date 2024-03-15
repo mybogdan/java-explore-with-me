@@ -7,6 +7,7 @@ public class ForbiddenException extends RuntimeException {
 
     private final String message;
     private final String reason;
+
     public ForbiddenException(String message, String reason) {
         super();
         this.message = message;
