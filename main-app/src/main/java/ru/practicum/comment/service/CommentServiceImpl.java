@@ -1,6 +1,7 @@
 package ru.practicum.comment.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,6 +26,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CommentServiceImpl implements CommentService {
     private final CommentRepository commentRepository;
     private final EventRepository eventRepository;
@@ -60,10 +62,12 @@ public class CommentServiceImpl implements CommentService {
             throw new NotFoundException("Comment with id=" + commentId + " was not found",
                     "The required object was not found.");
         }
-        if (comment.getCreatedOn().isBefore(LocalDateTime.now().minusHours(1))) {
+
+        if (isCommentEditable(comment.getCreatedOn())) {
             throw new ConflictException(
                     "Comment with id=" + commentId + " was created more than 1 hour ago", "The comment can not be edited.");
         }
+
         if (!comment.getComment().equals(newCommentDto.getComment())) {
             comment.setComment(newCommentDto.getComment());
             comment.setChangedOn(LocalDateTime.now());
@@ -87,6 +91,7 @@ public class CommentServiceImpl implements CommentService {
         }
 
         commentRepository.deleteById(commentId);
+        log.info("Deleted comment with id = {} by author", commentId);
     }
 
     @Override
@@ -135,5 +140,10 @@ public class CommentServiceImpl implements CommentService {
                         "The required object was not found."));
 
         commentRepository.deleteById(commentId);
+        log.info("Deleted comment with id = {} by admin", commentId);
+    }
+
+    public boolean isCommentEditable(LocalDateTime createdOnComment) {
+        return createdOnComment.isBefore(LocalDateTime.now().minusHours(1));
     }
 }
