@@ -27,14 +27,14 @@ public class RequestController {
     @PostMapping("/users/{userId}/requests")
     public ParticipationRequestDto save(@PathVariable Long userId,
                                         @RequestParam Long eventId) throws ParseException {
-        log.info("Приишел /POST PRIVATE запрос на фиксацию запроса с id {}, от пользователя - {}", eventId, userId);
+        log.info("Пришел /POST PRIVATE запрос на участие в событии с id {}, от текущего пользователя - {}", eventId, userId);
         return requestService.save(userId, eventId);
     }
 
     @PatchMapping("/users/{userId}/requests/{requestId}/cancel")
     public ParticipationRequestDto cancel(@PathVariable Long userId,
                                           @PathVariable Long requestId) throws ParseException {
-        log.info("Пришел /PATCH PRIVATE запрос на отмену своего запроса на участие в событие с id {}, от пользователя - {}", requestId, userId);
+        log.info("Пришел /PATCH PRIVATE запрос на отмену собственного запроса на участие в событие с id {}, от пользователя - {}", requestId, userId);
         return requestService.cancel(userId, requestId);
     }
 }
