@@ -50,14 +50,6 @@ _В рамках дипломного проекта реализовано пр
 [Сервис статистики](https://github.com/mybogdan/java-explore-with-me/blob/main/postman/stat.json)  
 [Функциональность комментирования](https://github.com/mybogdan/java-explore-with-me/blob/main/postman/feature.json)
 
-## Модель базы данных основного сервиса
-
-![Схема](ewm.png)
-
-## Модель базы данных сервиса статистики
-
-![Схема](stat.png)
-
 ## Иструкция по развертыванию
 * mvn clean package
 * mvn install
