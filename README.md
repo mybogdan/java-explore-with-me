@@ -46,8 +46,8 @@ _В рамках дипломного проекта реализовано пр
 [Сервис статистики](https://github.com/mybogdan/java-explore-with-me/blob/main/ewm-stats-service-spec.json)
 
 ## Postman тесты для сервисов:
-[Основной сервис](https://github.com/mybogdan/java-explore-with-me/blob/main/postman/main.json)  
-[Сервис статистики](https://github.com/mybogdan/java-explore-with-me/blob/main/postman/stat.json)  
+[Основной сервис](https://github.com/yandex-praktikum/java-explore-with-me/blob/main_svc/postman/ewm-stat-service.json)  
+[Сервис статистики](https://github.com/yandex-praktikum/java-explore-with-me/blob/stat_svc/postman/ewm-stat-service.json)  
 [Функциональность комментирования](https://github.com/mybogdan/java-explore-with-me/blob/main/postman/feature.json)
 
 ## Иструкция по развертыванию
